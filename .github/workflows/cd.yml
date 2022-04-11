@@ -16,26 +16,26 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ec2-user
-          password: ${{ secrets.ACCESS_KEY }}
+          key: ${{ secrets.ACCESS_KEY }}
           script: cd /home/ec2-user/snkrswallet/resell-server && git pull https://alessandro-marcantoni:${{ secrets.ACCESS_TOKEN }}@github.com/alessandro-marcantoni/resell-server
       - name: Update client
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
           username: ec2-user
-          password: ${{ secrets.ACCESS_KEY }}
+          key: ${{ secrets.ACCESS_KEY }}
           script: cd /home/ec2-user/snkrswallet/resell && git pull https://alessandro-marcantoni:${{ secrets.ACCESS_TOKEN }}@github.com/alessandro-marcantoni/resell
       - name: Delete docker containers and images
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
           username: ec2-user
-          password: ${{ secrets.ACCESS_KEY }}
+          key: ${{ secrets.ACCESS_KEY }}
           script: docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi $(docker images -a -q)
       - name: Build new docker compose
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
           username: ec2-user
-          password: ${{ secrets.ACCESS_KEY }}
+          key: ${{ secrets.ACCESS_KEY }}
           script: docker-compose up
