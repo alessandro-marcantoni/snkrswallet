@@ -3,31 +3,24 @@ name: Continuous Deployment
 on:
   workflow_dispatch:
   push:
-    branch:
+    branches:
       - main
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     name: Deploy
     steps:
-      - name: Checkout Code
-        run: cd /home/ec2-user/snkrswallet
-      - name: Update Server
+      - name: Login SSH and Deploy
         run: |
+          echo ${{ ACCESS_KEY }} > private.key
+          ssh -i private.key ec2-user@18.157.192.138
           cd /home/ec2-user/snkrswallet/resell-server
           git pull https://alessandro-marcantoni:${{ secrets.ACCESS_TOKEN }}@github.com/alessandro-marcantoni/resell-server
-          cd /home/ec2-user/snkrswallet
-      - name: Update Client
-        run: |
           cd /home/ec2-user/snkrswallet/resell
           git pull https://alessandro-marcantoni:${{ secrets.ACCESS_TOKEN }}@github.com/alessandro-marcantoni/resell
           cd /home/ec2-user/snkrswallet
-      - name: Remove existing containers
-        run: |
           docker stop $(docker ps -aq)
           docker rm $(docker ps -aq)
-      - name: Remove existing images
-        run: docker rmi $(docker images -a -q)
-      - name: Build new containers
-        run: docker-compose up
+          docker rmi $(docker images -a -q)
+          docker-compose up
