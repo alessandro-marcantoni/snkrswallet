@@ -1,0 +1,6 @@
+[submodule "resell"]
+	path = resell
+	url = https://github.com/alessandro-marcantoni/resell.git
+[submodule "resell-server"]
+	path = resell-server
+	url = https://github.com/alessandro-marcantoni/resell-server.git
