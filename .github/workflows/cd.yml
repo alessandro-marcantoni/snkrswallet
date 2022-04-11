@@ -15,14 +15,14 @@ jobs:
         run: cd /home/ec2-user/snkrswallet
       - name: Update Server
         run: |
-          cd ./resell-server
+          cd /home/ec2-user/snkrswallet/resell-server
           git pull https://alessandro-marcantoni:${{ secrets.ACCESS_TOKEN }}@github.com/alessandro-marcantoni/resell-server
-          cd ..
+          cd /home/ec2-user/snkrswallet
       - name: Update Client
         run: |
-          cd ./resell
+          cd /home/ec2-user/snkrswallet/resell
           git pull https://alessandro-marcantoni:${{ secrets.ACCESS_TOKEN }}@github.com/alessandro-marcantoni/resell
-          cd ..
+          cd /home/ec2-user/snkrswallet
       - name: Remove existing containers
         run: |
           docker stop $(docker ps -aq)
