@@ -1,0 +1,25 @@
+services:
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./resell
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      - basedodici
+
+  server:
+    depends_on:
+      - db
+    build:
+      dockerfile: Dockerfile
+      context: ./resell-server
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - basedodici
+
+networks:
+  basedodici:
