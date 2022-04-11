@@ -16,7 +16,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ec2-user
-          password: ${{ ACCESS_KEY }}
+          password: ${{ secrets.ACCESS_KEY }}
           script: cd /home/ec2-user/snkrswallet/resell-server && git pull https://alessandro-marcantoni:${{ secrets.ACCESS_TOKEN }}@github.com/alessandro-marcantoni/resell-server
       - name: Update client
         uses: appleboy/ssh-action@v0.1.4
