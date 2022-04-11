@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Login SSH and Deploy
         run: |
-          echo ${{ secrets.ACCESS_KEY }} > private.key
+          echo "${{ secrets.ACCESS_KEY }}" > private.key
           ssh -i private.key ec2-user@18.157.192.138
           cd /home/ec2-user/snkrswallet/resell-server
           git pull https://alessandro-marcantoni:${{ secrets.ACCESS_TOKEN }}@github.com/alessandro-marcantoni/resell-server
