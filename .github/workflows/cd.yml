@@ -31,7 +31,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ec2-user
           key: ${{ secrets.ACCESS_KEY }}
-          script: docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi $(docker images -a -q)
+          script: docker stop snkrswallet_client_1 snkrswallet_server_1 && docker rm -f snkrswallet_client_1 snkrswallet_server_1 && docker rmi snkrswallet_client snkrswallet_server
       - name: Build new docker compose
         uses: appleboy/ssh-action@v0.1.4
         with:
