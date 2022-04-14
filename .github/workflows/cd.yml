@@ -38,4 +38,4 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ec2-user
           key: ${{ secrets.ACCESS_KEY }}
-          script: docker-compose up
+          script: cd /home/ec2-user/snkrswallet && docker-compose up
