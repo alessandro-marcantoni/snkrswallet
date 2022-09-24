@@ -24,7 +24,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ec2-user
           key: ${{ secrets.ACCESS_KEY }}
-          script: cd /home/ec2-user/snkrswallet/resell && git stash && git pull https://alessandro-marcantoni:${{ secrets.ACCESS_TOKEN }}@github.com/alessandro-marcantoni/resell && git stash pop
+          script: cd /home/ec2-user/snkrswallet/resell && git pull https://alessandro-marcantoni:${{ secrets.ACCESS_TOKEN }}@github.com/alessandro-marcantoni/resell
       - name: Delete docker containers and images
         uses: appleboy/ssh-action@v0.1.4
         with:
