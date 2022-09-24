@@ -6,8 +6,10 @@ services:
       dockerfile: Dockerfile
       context: ./resell
     restart: always
+    env_file:
+      - ./resell/.env
     ports:
-      - 80:80
+      - "80:80"
     networks:
       - snkrswallet
 
@@ -17,7 +19,7 @@ services:
       context: ./resell-server
     restart: always
     ports:
-      - 3000:3000
+      - "3000:3000"
     networks:
       - snkrswallet
 
